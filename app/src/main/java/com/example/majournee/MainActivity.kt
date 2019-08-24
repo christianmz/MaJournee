@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import com.example.majournee.fragments.MusicFragment
+import com.example.majournee.fragments.ShopFragment
+import com.example.majournee.fragments.WeatherFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +20,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(toolbar)
         setNavDrawer()
+        nav_view.menu.getItem(0).isChecked = true
+        fragmentTransaction(WeatherFragment())
     }
 
     private fun setNavDrawer() {
@@ -26,8 +32,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        return true
+    private fun fragmentTransaction(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .commit()
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.nav_weather -> fragmentTransaction(WeatherFragment())
+            R.id.nav_top_music -> fragmentTransaction(MusicFragment())
+            R.id.nav_shop -> fragmentTransaction(ShopFragment())
+        }
+        return true
+    }
 }
