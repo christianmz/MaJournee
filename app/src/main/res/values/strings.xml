@@ -6,4 +6,6 @@
     <string name="sign_out">Cerrar Sesión</string>
     <string name="open_drawer">Drawer Open</string>
     <string name="closed_drawer">Drawer Closed</string>
+    <string name="user_name">Christian Meazza</string>
+    <string name="user_mail">christianmeazza@gmail.com</string>
 </resources>
