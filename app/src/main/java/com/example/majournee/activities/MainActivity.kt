@@ -1,4 +1,4 @@
-package com.example.majournee
+package com.example.majournee.activities
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,12 +7,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.example.majournee.R
 import com.example.majournee.fragments.MusicFragment
 import com.example.majournee.fragments.ShopFragment
 import com.example.majournee.fragments.WeatherFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,7 +33,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setNavDrawer() {
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.open_drawer, R.string.closed_drawer)
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
+            R.string.open_drawer,
+            R.string.closed_drawer
+        )
         toggle.isDrawerIndicatorEnabled = true
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -57,7 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_weather -> fragmentTransaction(WeatherFragment())
             R.id.nav_top_music -> fragmentTransaction(MusicFragment())
             R.id.nav_shop -> fragmentTransaction(ShopFragment())
-            R.id.nav_sign_out -> longToast(R.string.sign_out)
+            R.id.nav_sign_out -> this.longToast(R.string.sign_out)
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true

@@ -15,6 +15,7 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.setTitle(R.string.weather)
         return inflater.inflate(R.layout.fragment_weather, container, false)
     }
 

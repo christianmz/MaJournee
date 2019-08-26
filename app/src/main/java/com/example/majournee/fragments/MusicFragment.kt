@@ -16,6 +16,7 @@ class MusicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.setTitle(R.string.top_music)
         return inflater.inflate(R.layout.fragment_music, container, false)
     }
 

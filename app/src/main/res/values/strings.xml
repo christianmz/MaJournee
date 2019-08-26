@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Ma Journee</string>
-    <string name="Weather">Clima</string>
+    <string name="weather">Clima</string>
     <string name="top_music">Música</string>
     <string name="shop">Tienda</string>
     <string name="sign_out">Cerrar Sesión</string>
@@ -8,4 +8,5 @@
     <string name="closed_drawer">Drawer Closed</string>
     <string name="user_name">Christian Meazza</string>
     <string name="user_mail">christianmeazza@gmail.com</string>
+    <string name="item">item</string>
 </resources>
