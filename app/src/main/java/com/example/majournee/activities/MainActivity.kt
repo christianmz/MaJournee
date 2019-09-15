@@ -11,10 +11,10 @@ import com.example.majournee.R
 import com.example.majournee.fragments.MusicFragment
 import com.example.majournee.fragments.ShopFragment
 import com.example.majournee.fragments.WeatherFragment
+import com.example.majournee.mAuth
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -62,7 +62,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_weather -> fragmentTransaction(WeatherFragment())
             R.id.nav_top_music -> fragmentTransaction(MusicFragment())
             R.id.nav_shop -> fragmentTransaction(ShopFragment())
-            R.id.nav_sign_out -> this.longToast(R.string.sign_out)
+            R.id.nav_sign_out -> {
+                mAuth.signOut()
+                startActivity(intentFor<LoginActivity>().newTask().clearTask())
+            }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
