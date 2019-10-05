@@ -1,3 +1,3 @@
 package com.example.majournee.models
 
-data class Product(val name: String, val description: String, val price: Double)
+data class Product(var name: String, var description: String, var price: Double)

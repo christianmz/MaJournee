@@ -17,4 +17,12 @@
     <string name="not_found_user">User not found</string>
     <string name="error">Unexpected Error</string>
     <string name="email_already_exists">Email already exists</string>
+    <string name="daily_weather">Daily Weather</string>
+    <string name="hourly_weather">Hourly Weather</string>
+    <string name="temperature">Temperature</string>
+    <string name="temperature_placeholder">%d°C</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="precipitation_placeholder">%d%%</string>
+    <string name="bogota">Bogotá, Colombia</string>
+    <string name="summary_week">Summary Of The Week</string>
 </resources>

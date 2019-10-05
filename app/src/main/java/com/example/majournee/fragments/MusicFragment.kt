@@ -7,7 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.majournee.R
+import com.example.majournee.adapters.MusicAdapter
+import com.example.majournee.models.ParserSong
+import kotlinx.android.synthetic.main.fragment_music.view.*
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -16,6 +22,9 @@ import java.net.MalformedURLException
 import java.net.URL
 
 class MusicFragment : Fragment() {
+
+    private lateinit var mRecycler: RecyclerView
+    private val mLayoutManager by lazy { LinearLayoutManager(context) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,11 +35,15 @@ class MusicFragment : Fragment() {
 
         activity?.setTitle(R.string.top_music)
         DownloaderTask().execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/limit=10/xml")
+        mRecycler = rootView.rv_music as RecyclerView
+        DownloaderTask().setRecyclerView(mRecycler, mLayoutManager)
 
         return rootView
     }
 
-    private class DownloaderTask : AsyncTask<String, Unit, String>() {
+    class DownloaderTask : AsyncTask<String, Unit, String>() {
+
+        private var mAdapter: MusicAdapter? = null
 
         override fun doInBackground(vararg string: String): String? {
             val rssFeed: String? = downloadXMLFile(string[0])
@@ -40,8 +53,20 @@ class MusicFragment : Fragment() {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            Log.d("MyResult", "Apple Data: $result")
+
+            val parseData = ParserSong()
+            parseData.parseData(result)
+            val songs = parseData.songs
+            mAdapter = MusicAdapter(songs)
         }
+
+        fun setRecyclerView(mRecycler: RecyclerView, mLayoutManager: LinearLayoutManager) =
+            with(mRecycler) {
+                setHasFixedSize(true)
+                itemAnimator = DefaultItemAnimator()
+                layoutManager = mLayoutManager
+                adapter = mAdapter
+            }
 
         private fun downloadXMLFile(urlPath: String): String? {
 
@@ -61,13 +86,9 @@ class MusicFragment : Fragment() {
                 }
                 reader.close()
                 return xmlResult.toString()
-
-
             } catch (e: MalformedURLException) {
                 Log.e("MyError", "URL Error")
-            }
-
-            catch (e: IOException) {
+            } catch (e: IOException) {
                 Log.e("MyError", "IOException Error")
             }
             return null

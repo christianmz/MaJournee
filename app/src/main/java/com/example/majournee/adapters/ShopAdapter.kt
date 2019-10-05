@@ -1,11 +1,9 @@
 package com.example.majournee.adapters
 
-import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.majournee.R
-import com.example.majournee.activities.DetailProductActivity
 import com.example.majournee.inflate
 import com.example.majournee.models.Product
 import kotlinx.android.synthetic.main.cardview_product.view.*
@@ -28,6 +26,7 @@ class ShopAdapter(private val data: List<Product>) :
                 tv_product_desc.text = product.description
                 tv_product_price.text = "$ ${String.format("%.2f", product.price)}"
 
+                /*
                 setOnClickListener {
 
                     val intent = Intent(context, DetailProductActivity::class.java)
@@ -35,14 +34,14 @@ class ShopAdapter(private val data: List<Product>) :
                     intent.putExtra("desc", product.description)
                     intent.putExtra("price", product.price)
 
-                    /*val pairImage: Pair<View, String> =
-                        Pair.create(iv_product_detail, "trans_image")
+                    val pairImage: Pair<View, String> =
+                        Pair(iv_product_detail, "trans_image")
                     val pairName: Pair<View, String> =
-                        Pair.create(tv_product_name, "trans_name")
+                        Pair(tv_product_name, "trans_name")
                     val pairDesc: Pair<View, String> =
-                        Pair.create(tv_product_desc, "trans_desc")
+                        Pair(tv_product_desc, "trans_desc")
                     val pairPrice: Pair<View, String> =
-                        Pair.create(tv_product_price, "trans_price")
+                        Pair(tv_product_price, "trans_price")
 
                     val options: ActivityOptionsCompat =
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -52,8 +51,8 @@ class ShopAdapter(private val data: List<Product>) :
                             pairDesc,
                             pairPrice
                         )
-                    context.startActivity(intent, options.toBundle())*/
-                }
+                    context.startActivity(intent, options.toBundle())
+                }*/
             }
     }
 }
